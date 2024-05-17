@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" href="/fermi/stolen.css"/>
+        <link rel="stylesheet" href="/fermi/styles.css"/>
+        <script src="/fermi/questions.js"></script>
+    </head>
+    
+    <body>
+        <article id="question-box">
+            <span id="source">source</span><br>
+            <em><span id="question">question</span></em>
+            <hr>
+            <div id="answer-box">
+                <div class="fermi-form">
+                    <input id="answer" type="number" step="1"/>
+                    <button id="submit" type="button">[Submit]</button>
+                    <button id="next" type="button">[Next Question]</button>
+                </div>
+            </div>
+            <span id="wa" hidden>wrong answer, answer was <em><span id="cans"></span></em></span>
+            <span id="ca" hidden>correct</span>
+        </article>
+
+        <script>
+            let input1 = document.getElementById("answer");
+            input1.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    document.getElementById("submit").click();
+                }
+            });
+
+            document.querySelector('#submit').onclick = async (ev) => {
+                if (document.getElementById('answer').value == a) {
+                    document.getElementById('wa').hidden = true
+                    document.getElementById('ca').hidden = false
+                } else {
+                    document.getElementById('wa').hidden = false
+                    document.getElementById('ca').hidden = true
+                }
+                return;
+			};
+
+            let q = "what is 2+2"
+            let a = "4";
+            let s = "placeholder";
+
+            function newQuestion() {
+                let rand_q = q_data[Math.floor(Math.random()*q_data.length)];
+                q = rand_q['question'];
+                a = rand_q['answer'];
+                s = rand_q['source'];
+                update();
+            }
+
+            function update() {
+                document.getElementById('question').innerText = q;
+                document.getElementById('source').innerText = s;
+                document.getElementById('cans').innerText = a;
+            }
+
+            newQuestion();
+
+            document.querySelector('#next').onclick = async (ev) => {
+                newQuestion();
+			};
+        </script>
+    </body>
+</html>

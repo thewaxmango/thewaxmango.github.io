@@ -1,0 +1,45 @@
+body {
+    margin: 20px !important;
+}
+
+hr {
+    border: 1px solid #999999;
+}
+
+input[type="text"], input[type="number"], input[type="url"] {
+    border: 1px solid #777777 !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.fermi-form {
+    display: block;
+    width: fit-content;
+    height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 5px;
+}
+
+#answer-box {
+    display: flex;
+    height: fit-content;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#wa {
+    color:tomato !important;
+}
+
+#ca {
+    color: lawngreen !important;
+}
+
+#source {
+    font-size: 16px;
+}
