@@ -34,11 +34,11 @@
 
             document.querySelector('#submit').onclick = async (ev) => {
                 if (document.getElementById('answer').value == a) {
-                    document.getElementById('wa').hidden = true
-                    document.getElementById('ca').hidden = false
+                    document.getElementById('wa').hidden = true;
+                    document.getElementById('ca').hidden = false;
                 } else {
-                    document.getElementById('wa').hidden = false
-                    document.getElementById('ca').hidden = true
+                    document.getElementById('wa').hidden = false;
+                    document.getElementById('ca').hidden = true;
                 }
                 return;
 			};
@@ -52,8 +52,8 @@
                 q = rand_q['question'];
                 a = rand_q['answer'];
                 s = rand_q['source'];
-	    document.getElementById('wa').hidden = true
-	    document.getElementById('ca').hidden = true
+		document.getElementById('wa').hidden = true;
+		document.getElementById('ca').hidden = true;
                 update();
             }
 
