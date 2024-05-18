@@ -2,9 +2,9 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <link rel="stylesheet" href="/fermi/stolen.css"/>
-        <link rel="stylesheet" href="/fermi/styles.css"/>
-        <script src="/fermi/questions.js"></script>
+        <link rel="stylesheet" href="./fermi/stolen.css"/>
+        <link rel="stylesheet" href="./fermi/styles.css"/>
+        <script src="./fermi/questions.js"></script>
     </head>
     
     <body>
@@ -52,9 +52,10 @@
                 q = rand_q['question'];
                 a = rand_q['answer'];
                 s = rand_q['source'];
-		document.getElementById('wa').hidden = true;
-		document.getElementById('ca').hidden = true;
                 update();
+                document.getElementById('wa').hidden = true;
+                document.getElementById('ca').hidden = true;
+                document.getElementById('answer').value = "";
             }
 
             function update() {
@@ -63,11 +64,11 @@
                 document.getElementById('cans').innerText = a;
             }
 
-            newQuestion();
-
             document.querySelector('#next').onclick = async (ev) => {
                 newQuestion();
 			};
+
+            newQuestion();
         </script>
     </body>
 </html>
