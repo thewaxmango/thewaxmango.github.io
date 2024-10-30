@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <script src="./lambdacalc/main.js"></script>
+        <script src="./main.js"></script>
     </head>
     
     <body style="font-family:monospace; outline:none">
@@ -19,7 +19,7 @@
                 <button onclick="solution()">Solution</button>
                 <button onclick="newproblem()">Next Problem</button>
             </p>
-            <div><label for="radio0">Expression depth: <input type="number" id="depth" min="2" max="12" value=3></label></div>
+            <div><label for="radio0">Expression depth: <input type="number" id="depth" min="2" max="12" value=4></label></div>
         </div>
         
         <script>
@@ -47,7 +47,7 @@
                 document.getElementById("accept").innerText = "";
                 
                 let p = parser(lexer(gen(document.getElementById("depth").value)));
-                while (infinite(p)) {
+                while (infinite(p) || subs < document.getElementById("depth").value) {
                     p = parser(lexer(gen(document.getElementById("depth").value)));
                 }
                 let a = alphabetize(alphaSub(p));
