@@ -343,7 +343,7 @@ function gen(depth, boundVars = new Set(), immediateBound = null) {
     if (immediateBound) {
         isAbstraction = Math.random() < 0.25;
     } else {
-        isAbstraction = Math.random() < 0.5;
+        isAbstraction = Math.random() < 0.4;
     }
 
     if (isAbstraction) {
@@ -354,15 +354,24 @@ function gen(depth, boundVars = new Set(), immediateBound = null) {
         return `(λ${variable}.${body})`;
     } else {
         let left, right;
-        if (immediateBound && Math.random() < 0.6) {
+        if (immediateBound && Math.random() < 0.5) {
             left = immediateBound;
+        } else if (Math.random() < 0.2 && boundVars.size > 0) {
+            const boundArray = Array.from(boundVars);
+            left = boundArray[Math.floor(Math.random() * boundArray.length)];
+        } else if (Math.random() < 0.15) {
+            const freeArray = freeVars; 
+            left = freeArray[Math.floor(Math.random() * freeArray.length)];
         } else {
             left = gen(depth - 1, boundVars);
         }
-        if (Math.random() < 0.4 && boundVars.size > 0) {
+
+        if (immediateBound && Math.random() < 0.5) {
+            right = immediateBound;
+        } else if (Math.random() < 0.2 && boundVars.size > 0) {
             const boundArray = Array.from(boundVars);
             right = boundArray[Math.floor(Math.random() * boundArray.length)];
-        } else if (Math.random() < 0.2) {
+        } else if (Math.random() < 0.15) {
             const freeArray = freeVars; 
             right = freeArray[Math.floor(Math.random() * freeArray.length)];
         } else {
