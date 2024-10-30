@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <script src="./lambdacalc/main.js"></script>
+    </head>
+    
+    <body style="font-family:monospace; outline:none">
+        <div>
+            <p>Enter an equivalent lambda expression in beta-normal form. You may use either λ or ^ to represent the lambda character. Press enter after entering an answer to get feedback.</p>
+            <p id="problem"></p>
+            <textarea id="code_input" type="text" rows="1" style="width: 100%; resize: none;"></textarea>
+            <p>
+                <span id="fail" style="color:red"></span>
+                <span id="accept" style="color:green"></span>
+            </p>
+            <p>
+                <button onclick="check()">Submit</button>
+                <button onclick="solution()">Solution</button>
+                <button onclick="newproblem()">Next Problem</button>
+            </p>
+            <div><label for="radio0">Expression depth: <input type="number" id="depth" min="2" max="12" value=4></label></div>
+        </div>
+        
+        <script>
+            document.getElementById("depth").addEventListener("keydown", e => e.preventDefault());
+            document.getElementById("code_input").addEventListener("keydown", e => {
+                if (e.keyCode == 13 && !e.shiftKey) {
+                    e.preventDefault();
+                    check();
+                }
+            });
+
+            let curproblem = 0;
+
+            function infinite(p) {
+                try {
+                    reduceAST(p);
+                    return false;
+                } catch (error) {
+                    return true;
+                }
+            }
+
+            function newproblem() {
+                document.getElementById("fail").innerText = "";
+                document.getElementById("accept").innerText = "";
+                
+                let p = parser(lexer(gen(document.getElementById("depth").value)));
+                while (infinite(p)) {
+                    p = parser(lexer(gen(document.getElementById("depth").value)));
+                }
+                let a = alphabetize(alphaSub(p));
+                document.getElementById("problem").innerText = a.toString();
+                document.getElementById("code_input").value = "";
+                curproblem = a;
+                return a;
+            }
+
+            function check() {
+                document.getElementById("fail").innerText = "";
+                document.getElementById("accept").innerText = "";
+
+                let solution = alphabetize(reduceAST(curproblem)).toString();
+                try {
+                    let student = alphabetize(
+                        reduceAST(
+                            alphaSub(    
+                                parser(
+                                    lexer(document.getElementById("code_input").value)
+                                )
+                            )
+                        )
+                    ).toString();
+                
+                    if (solution !== student) {
+                        document.getElementById("fail").innerText = "Incorrect";
+                    } else {
+                        document.getElementById("accept").innerText = "Correct";
+                    }
+                } catch (error) {
+                    console.log("Failed to process user input.");
+                    document.getElementById("fail").innerText = "Incorrect";
+                }
+            }
+
+            function solution() {
+                document.getElementById("fail").innerText = reduceAST(curproblem).toString();
+                document.getElementById("accept").innerText = "";
+            }
+
+            newproblem();
+        </script>
+    </body>
+</html>
