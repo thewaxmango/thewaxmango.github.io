@@ -47,7 +47,7 @@
                 document.getElementById("accept").innerText = "";
                 
                 let p = parser(lexer(gen(document.getElementById("depth").value)));
-                while (infinite(p) || (subs < document.getElementById("depth").value * pow(Math.random(), 2) && Math.random() < 0.9)) {
+                while (infinite(p) || (subs < document.getElementById("depth").value * Math.pow(Math.random(), 2) && Math.random() < 0.9)) {
                     p = parser(lexer(gen(document.getElementById("depth").value)));
                 }
                 let a = alphabetize(alphaSub(p));
