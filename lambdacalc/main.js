@@ -357,7 +357,7 @@ function gen(depth, boundVars = new Set(), immediateBound = null) {
         return `(λ${variable}.${body})`;
     } else {
         let left, right;
-        if (immediateBound && Math.random() < 0.5) {
+        if (immediateBound && Math.random() < 0.4) {
             left = immediateBound;
         } else if (Math.random() < 0.2 && boundVars.size > 0) {
             const boundArray = Array.from(boundVars);
@@ -369,7 +369,7 @@ function gen(depth, boundVars = new Set(), immediateBound = null) {
             left = gen(depth - 1, boundVars);
         }
 
-        if (immediateBound && Math.random() < 0.5) {
+        if (immediateBound && Math.random() < 0.4) {
             right = immediateBound;
         } else if (Math.random() < 0.2 && boundVars.size > 0) {
             const boundArray = Array.from(boundVars);
