@@ -343,7 +343,7 @@ function gen(depth, boundVars = new Set(), immediateBound = null) {
     if (immediateBound) {
         isAbstraction = Math.random() < 0.25;
     } else {
-        isAbstraction = Math.random() < 0.4;
+        isAbstraction = Math.random() < 0.5;
     }
 
     if (isAbstraction) {
