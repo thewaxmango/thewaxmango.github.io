@@ -253,7 +253,9 @@ function alphaSub(input) {
     return sub(input, Object.fromEntries([...freeVars(input)].map(s => [s, s])));
 }
 
+let subs = 0;
 function reduceAST(input, lazy = false) {
+    subs = 0;
     function reduce(input, depth, env = {}) {
         if (parseInt(depth) === 255) {
             throw new Error(`Reduction reached recursion limit (255).`); 
@@ -263,6 +265,7 @@ function reduceAST(input, lazy = false) {
                 if (!env[input.contents]) {
                     return input;
                 }
+                subs += 1;
                 return reduce(env[input.contents], parseInt(depth)+1, env);
               
             case AST_ID.A_LAM:
