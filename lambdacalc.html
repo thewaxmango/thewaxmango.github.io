@@ -52,7 +52,6 @@
                 ) {                    
                     p = parser(lexer(gen(document.getElementById("depth").value)));
                 }
-                console.log(subs)
                 let a = alphabetize(alphaSub(p));
                 document.getElementById("problem").innerText = a.toString();
                 document.getElementById("code_input").value = "";
