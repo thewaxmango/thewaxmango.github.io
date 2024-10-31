@@ -276,6 +276,7 @@ function reduceAST(input, lazy = false) {
                 if (l.type_id !== AST_ID.A_LAM) {
                     return makeAST(AST_ID.A_APP, l, reduce(input.contents[1], parseInt(depth)+1, env));
                 }
+                subs += 3;
                 let temp = null;
                 let c = l.contents[0].contents;
                 if (env[c]) {
@@ -357,8 +358,10 @@ function gen(depth, boundVars = new Set(), immediateBound = null) {
         return `(λ${variable}.${body})`;
     } else {
         let left, right;
+        flag = false;
         if (immediateBound && Math.random() < 0.4) {
             left = immediateBound;
+            flag = true;
         } else if (Math.random() < 0.2 && boundVars.size > 0) {
             const boundArray = Array.from(boundVars);
             left = boundArray[Math.floor(Math.random() * boundArray.length)];
@@ -369,12 +372,12 @@ function gen(depth, boundVars = new Set(), immediateBound = null) {
             left = gen(depth - 1, boundVars);
         }
 
-        if (immediateBound && Math.random() < 0.4) {
+        if (immediateBound && Math.random() < 0.25 + (flag ? -0.15 : 0.15)) {
             right = immediateBound;
-        } else if (Math.random() < 0.2 && boundVars.size > 0) {
+        } else if (Math.random() < 0.25 && boundVars.size > 0) {
             const boundArray = Array.from(boundVars);
             right = boundArray[Math.floor(Math.random() * boundArray.length)];
-        } else if (Math.random() < 0.15) {
+        } else if (Math.random() < 0.2) {
             const freeArray = freeVars; 
             right = freeArray[Math.floor(Math.random() * freeArray.length)];
         } else {
