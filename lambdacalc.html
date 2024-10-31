@@ -48,7 +48,7 @@
                 let i = 0;
                 let p = parser(lexer(gen(document.getElementById("depth").value)));
                 while (infinite(p) || 
-                    (subs < document.getElementById("depth").value * 3 * Math.pow(Math.random(), 0.4) && (Math.random() < 0.97))
+                    (subs < document.getElementById("depth").value * 3 * Math.pow(Math.random(), 0.3) && (Math.random() < 0.99))
                 ) {                    
                     p = parser(lexer(gen(document.getElementById("depth").value)));
                 }
